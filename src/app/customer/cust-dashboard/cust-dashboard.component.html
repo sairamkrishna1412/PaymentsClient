@@ -1,0 +1,81 @@
+<div class="min-h-screen text-tblack">
+  <pp-header class="bg-secondary"></pp-header>
+  <div class="bg-secondary py-4">
+    <div class="container">
+      <div class="top-container pt-5 flex flex-col">
+        <h1 class="text-4xl font-semibold italic">Welcome {{ custName }}.</h1>
+
+        <div class="pt-10 flex justify-between">
+          <h1 class="text-2xl font-semibold italic">
+            Balance {{ custBalance.toFixed(2) }}
+          </h1>
+          <div class="new-transaction flex items-center gap-1 cursor-pointer">
+            <img src="assets/svg/addblack.svg" alt="Add" />
+            <span class="text-xl">New Transaction</span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-20">
+        <h2 class="text-xl">Pending Transactions :</h2>
+        <table
+          class="mt-4 table-auto bg-tertiary rounded-2xl w-full text-tblack border-separate border-spacing-x-4 border-spacing-y-8"
+        >
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Debit/Credit</th>
+              <th>From/To</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr>
+              <td>14/12/2000</td>
+              <td>Debit</td>
+              <td>Shiva ram krishna</td>
+              <td>CTB</td>
+              <td>2000</td>
+              <td>Pending</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <hr class="h-[2px]" />
+  <div class="bg-primaryl py-4">
+    <div class="container">
+      <div class="mt-10">
+        <h2 class="text-xl">Completed Transactions :</h2>
+        <table
+          class="mt-4 table-auto bg-tertiary rounded-2xl w-full text-tblack border-separate border-spacing-x-4 border-spacing-y-8"
+        >
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Debit/Credit</th>
+              <th>From/To</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr>
+              <td>14/12/2000</td>
+              <td>Credit</td>
+              <td>Shiva ram krishna</td>
+              <td>CTC</td>
+              <td>2000</td>
+              <td>Accepted</td>
+              <td>None</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
