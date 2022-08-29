@@ -12,11 +12,11 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class EmpTransactionComponent implements OnInit {
 
   empTransactionForm = this.formBuilder.group({
-    customerId: ['83020817828620', Validators.required],
+    customerId: ['39145971759304', Validators.required],
     receiverAccountHolderNumber: ['71319440983198', Validators.required],
-    senderBic: ['ABBLINBBXXX', Validators.required],
+    senderBic: ['AXISINBBXXX', Validators.required],
     receiverBic: ['ACBLINBBXXX', Validators.required],
-    currencyAmount: ['123', Validators.required],
+    currencyAmount: ['122342323', Validators.required],
 
   
   });
@@ -44,7 +44,12 @@ export class EmpTransactionComponent implements OnInit {
           this.empTransactionForm.reset();
         }
       },
-      error : (err) => {
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.error.message,
+          })
         console.log("error", err);
       }
     });

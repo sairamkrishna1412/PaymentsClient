@@ -46,6 +46,6 @@ export class EmployeeService {
 
   private handleError(err: HttpErrorResponse) {
     console.log(err);
-    return throwError(() => err.message);
+    return throwError(() => err);
   }
 }
