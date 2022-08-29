@@ -5,9 +5,17 @@ import { catchError, Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class GeneralService {
+export class CustomerService {
   private rootUrl = 'http://localhost:8081';
+  private _userData : object = {};
 
+  get userData():object{
+    return this._userData;
+  }
+  set userData(data:object){
+      this._userData = data;
+  }
+  
   constructor(private http: HttpClient) {}
 
   getIsLive(): Observable<any> {
