@@ -3,19 +3,19 @@
   <!-- <div
     class="loginBox my-12 bg-primary px-20 py-12 max-w-3xl rounded-[30px] mx-auto"
   > -->
-  <form>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h1 class="text-4xl font-semibold italic mb-16">Login</h1>
     <div class="form-groups flex flex-col gap-16">
       <div class="form-group text-xl flex flex-col gap-3">
         <label for="">ID or Username</label>
-        <input class="px-3 py-2 rounded outline-none text-tblack" type="text" />
+        <input formControlName="username" class="px-3 py-2 rounded outline-none text-tblack" type="text"/>
       </div>
       <div class="form-group text-xl flex flex-col gap-3">
         <label for="">Password</label>
-        <input class="px-3 py-2 rounded outline-none text-tblack" type="password" />
+        <input formControlName="password" class="px-3 py-2 rounded outline-none text-tblack" type="password"/>
       </div>
       <div class="self-center">
-        <button class="bg-tertiary px-20 py-3 rounded-3xl text-primary">
+        <button type="submit" class="bg-tertiary px-20 py-3 rounded-3xl text-primary">
           Login
         </button>
       </div>
