@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { EmployeeService } from '../employee.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -12,12 +12,17 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class EmpTransactionComponent implements OnInit {
 
   empTransactionForm = this.formBuilder.group({
-    customerId: "83020817828620",
-    receiverAccountHolderNumber: "71319440983198",
-    senderBic: "ABBLINBBXXX",
-    receiverBic: "ACBLINBBXXX",
-    currencyAmount: "123"
+    customerId: ['83020817828620', Validators.required],
+    receiverAccountHolderNumber: ['71319440983198', Validators.required],
+    senderBic: ['ABBLINBBXXX', Validators.required],
+    receiverBic: ['ACBLINBBXXX', Validators.required],
+    currencyAmount: ['123', Validators.required],
+
+  
   });
+
+  
+
   constructor(
     private formBuilder: FormBuilder,
     private empService: EmployeeService,
@@ -25,6 +30,7 @@ export class EmpTransactionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
   }
 
   onSubmit() {

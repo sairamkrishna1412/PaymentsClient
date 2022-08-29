@@ -1,5 +1,5 @@
 <div class="min-h-screen text-white">
-  <pp-header class="bg-white"></pp-header>
+  <pp-dash-header class="bg-white"></pp-dash-header>
   <div class="bg-tertiary min-h-screen pt-10">
     <div class="newTrnsactionBox bg-primaryl px-20 py-10 max-w-3xl rounded-[30px] mx-auto">
       <form [formGroup]="empTransactionForm" (ngSubmit)="onSubmit()">
@@ -33,50 +33,14 @@
               formControlName="currencyAmount" />
           </div>
           <div class="self-center">
-            <button class="bg-tertiary px-20 py-5 rounded-3xl text-primary">
+            <button class="bg-tertiary px-20 py-5 rounded-3xl text-primary" type="submit"
+              [disabled]="!empTransactionForm.valid">
               Send
             </button>
           </div>
+          <!-- <p>Form Status: {{ empTransactionForm.status }}</p> -->
         </div>
       </form>
     </div>
   </div>
 </div>
-
-
-<!-- <script>
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: false
-  })
-
-  swalWithBootstrapButtons.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, proceed!',
-    cancelButtonText: 'No, cancel!',
-    reverseButtons: true
-  }).then((result) => {
-    if (result.isConfirmed) {
-      swalWithBootstrapButtons.fire(
-        'Transaction Successful!',
-        'Your transaction has been recorded.',
-        'success'
-      )
-    } else if (
-      /* Read more about handling dismissals below */
-      result.dismiss === Swal.DismissReason.cancel
-    ) {
-      swalWithBootstrapButtons.fire(
-        'Cancelled',
-        'Your transaction has been cancelled :)',
-        'error'
-      )
-    }
-  })
-</script> -->
