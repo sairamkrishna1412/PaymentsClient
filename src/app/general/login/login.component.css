@@ -1,0 +1,24 @@
+form {
+  background: white;
+  height: 520px;
+  width: 400px;
+  background: linear-gradient(to right bottom,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.1));
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  backdrop-filter: blur(2rem);
+  padding: 50px 35px;
+  z-index: 4;
+}
+
+form * {
+  font-family: 'Poppins', sans-serif;
+  color: #000000;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
