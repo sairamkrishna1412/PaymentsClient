@@ -19,7 +19,8 @@ export class GeneralService {
   loginUser(form: any): Observable<any> {
     console.log(form, typeof form);
     return this.http
-          .post<any>(`${this.rootUrl}/login`, {username : form.username, password : form.password})
+          .post<any>(`${this.rootUrl}/login`
+          , {username : form.username, password : form.password}, {withCredentials: true})
           .pipe(catchError(this.handleError));
   }
 

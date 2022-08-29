@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { CustomerService } from 'src/app/customer/customer.service';
 import { EmployeeService } from 'src/app/employee/employee.service';
 import { GeneralService } from '../general.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'pp-login',
@@ -12,15 +12,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.formBuilder.group({
-    username:  '',
-    password: ''
+    username:  'sairamkrishna',
+    password: '1234'
   });
 
   constructor(private generalService : GeneralService,
     private customerService : CustomerService,
     private employeeService : EmployeeService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -31,15 +32,17 @@ export class LoginComponent implements OnInit {
     this.generalService.loginUser(this.loginForm.value).subscribe({
       next : (data) => {
         if(data.status == 200){
-          if(data.data?.hasOwnProperty("roles")){
-            const role = data.data.roles;
+          if(data.data?.user?.hasOwnProperty("roles")){
+            const role = data.data.user.roles;
             if(role == "employee"){
               this.employeeService.userData = data.data;
-              this.router.navigate(['/emp/dashbaord']);
+              this.router.navigate(['/emp/dashboard']);
             }else{
               this.customerService.userData = data.data;
-              this.router.navigate(['/cust/dashbaord']);
+              this.router.navigate(['/cust/dashboard']);
             }
+            
+            // document.cookie = `jwt=${data.data.jwt}; expires=${new Date(Date.now() + 1000*60*60*10)}; Domain=localhost; SameSite=None;`;
           }
         }
         console.log("User log in response: ", data);
