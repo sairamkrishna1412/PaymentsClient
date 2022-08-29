@@ -20,6 +20,40 @@ export class EmpDashboardComponent implements OnInit {
     this.finalizedTransactions.unshift(transaction);
   }
 
+  onFinalize(transactionId : string, isAccepted:boolean){
+    console.log("heread");
+    let data;
+    if(isAccepted){
+     data = {
+        transactionId,
+        employeeRemarks : "Secure transaction",
+        status : "ACCEPTED"
+      }
+    }else{
+      data = {
+        transactionId,
+        employeeRemarks : "Employee fought with wife.",
+        status : "REJECTED"
+      }
+    }
+    console.log(data);
+    this.empService.finalizeTransaction(data).subscribe({
+      next : (data) => {
+        if(data.status == 200){
+          console.log(data);
+          data = data.data;
+        }
+      },
+      error: (err) => {
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err.error.message,
+        })
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.empData = this.empService.userData;
     if(this.empData.hasOwnProperty('user') 

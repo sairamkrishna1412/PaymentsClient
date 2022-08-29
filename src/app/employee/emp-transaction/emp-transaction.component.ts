@@ -16,9 +16,7 @@ export class EmpTransactionComponent implements OnInit {
     receiverAccountHolderNumber: ['71319440983198', Validators.required],
     senderBic: ['ABBLINBBXXX', Validators.required],
     receiverBic: ['ACBLINBBXXX', Validators.required],
-    currencyAmount: ['123', Validators.required],
-
-  
+    currencyAmount: ['123', Validators.required]
   });
 
   

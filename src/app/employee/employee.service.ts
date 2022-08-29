@@ -31,6 +31,13 @@ export class EmployeeService {
           .pipe(catchError(this.handleError));
   }
 
+  finalizeTransaction(data:object){
+    console.log(data);
+    return this.http
+    .post<any>(`${this.rootUrl}/emp/finalizeTransaction`, data, {withCredentials: true})
+    .pipe(catchError(this.handleError));
+  }
+
   getIsLive(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/status`)
@@ -46,6 +53,6 @@ export class EmployeeService {
 
   private handleError(err: HttpErrorResponse) {
     console.log(err);
-    return throwError(() => err.message);
+    return throwError(() => err);
   }
 }
