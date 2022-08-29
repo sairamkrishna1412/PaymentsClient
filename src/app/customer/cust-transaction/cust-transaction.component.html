@@ -23,7 +23,8 @@
               formControlName="currencyAmount">
           </div>
           <div class="self-center">
-            <button class="bg-tertiary px-20 py-5 rounded-3xl text-primary" type="submit">
+            <button class="bg-tertiary px-20 py-5 rounded-3xl text-primary" type="submit"
+              [disabled]="!custTransactionForm.valid">
               Send
             </button>
           </div>
