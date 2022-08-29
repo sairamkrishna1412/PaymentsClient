@@ -12,7 +12,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.formBuilder.group({
-    username:  'sairamkrishna',
+    username:  'akrishnamohan',
     password: '1234'
   });
 
@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
     this.generalService.loginUser(this.loginForm.value).subscribe({
       next : (data) => {
         if(data.status == 200){
-          if(data.data?.user?.hasOwnProperty("roles")){
+          if(data.data?.user){
             const role = data.data.user.roles;
             if(role == "employee"){
               this.employeeService.userData = data.data;
               this.router.navigate(['/emp/dashboard']);
-            }else{
+            }else if(data.data.user.hasOwnProperty("customerId")){
               this.customerService.userData = data.data;
               this.router.navigate(['/cust/dashboard']);
             }

@@ -7,24 +7,15 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./emp-dashboard.component.css'],
 })
 export class EmpDashboardComponent implements OnInit {
-  empName: string = 'Vikram';
   empData : any;
   user : any;
-  pendingTransactions : any;
-  finalizedTransactions : any;
+  pendingTransactions : any = [];
+  finalizedTransactions : any = [];
   constructor(private empService: EmployeeService) {}
 
-  // setEmployeeData(data: any){
-  //   if(data.hasOwnProperty('user') 
-  //   && data.hasOwnProperty('pendingTransactions') 
-  //   && data.hasOwnProperty('finalizedTransactions')){
-  //     this.user = data.user;
-  //     this.pendingTransactions = data.pendingTransactions;
-  //     this.finalizedTransactions = data.finalizedTransactions;
-  //   }else{
-  //     throw new Error("Employee data not fetched");
-  //   }
-  // }
+  addTofinalizedTransactions(transaction : object){
+    this.finalizedTransactions.unshift(transaction);
+  }
 
   ngOnInit(): void {
     this.empData = this.empService.userData;
@@ -53,7 +44,7 @@ export class EmpDashboardComponent implements OnInit {
         error : (err) => {console.log(err)}
       })
     }
-    console.log(this.empData);
+    // console.log(this.empData);
     // this.empDetails = 
   }
 }
