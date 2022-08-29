@@ -22,7 +22,7 @@ export class CustDashboardComponent implements OnInit {
     && this.userData.hasOwnProperty('transactions') ){
       this.user = this.userData.user;
       this.pendingTransactions = this.userData.transactions.filter((t : any) => t.status == "PENDING");
-      this.completedTransactions = this.userData.transactions.filter((t : any) => t.status == "ACCEPTED");
+      this.completedTransactions = this.userData.transactions.filter((t : any) => t.status == "ACCEPTED" || t.status == "REJECTED");
       console.log(this.user, this.pendingTransactions, this.completedTransactions);
     }else{
       // make a request to get user details
@@ -35,7 +35,7 @@ export class CustDashboardComponent implements OnInit {
               && data.hasOwnProperty('transactions') ){
               this.user = data.user;
               this.pendingTransactions = data.transactions.filter((t : any) => t.status == "PENDING");
-              this.completedTransactions = data.transactions.filter((t : any) => t.status == "ACCEPTED");
+              this.completedTransactions = data.transactions.filter((t : any) => t.status == "ACCEPTED" || t.status == "REJECTED");
               console.log(this.user, this.pendingTransactions, this.completedTransactions);
             }
           }

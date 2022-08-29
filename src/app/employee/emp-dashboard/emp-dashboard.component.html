@@ -40,10 +40,10 @@
 
                     <button name="submit"
                       class="hover:shadow-lg action_btn submit bg-emerald-200 hover:bg-emerald-400 hover:text-white transition-all"
-                      type="submit" value="Save" onclick="">Accept</button>
+                      type="submit" value="Save" (click)="onFinalize(transaction.transactionId, true)">Accept</button>
                     <button name="submit"
                       class="action_btn cancel hover:shadow-lg bg-red-200 hover:bg-red-400 hover:text-white transition-all"
-                      type="submit" value="Cancel" onclick="">Reject</button>
+                      type="submit" value="Cancel" (click)="onFinalize(transaction.transactionId, false)">Reject</button>
 
                     <p id="saved"></p>
 

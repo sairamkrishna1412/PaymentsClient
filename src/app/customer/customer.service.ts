@@ -24,6 +24,13 @@ export class CustomerService {
       .pipe(catchError(this.handleError));
   }
 
+  transferCtc(form: any): Observable<any> {
+    console.log(form, typeof form);
+    return this.http
+          .post<any>(`${this.rootUrl}/cust/transfer/ctc`, {...form},{withCredentials : true})
+          .pipe(catchError(this.handleError));
+  }
+
   getIsLive(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/status`)
@@ -39,6 +46,6 @@ export class CustomerService {
 
   private handleError(err: HttpErrorResponse) {
     console.log(err);
-    return throwError(() => err.message);
+    return throwError(() => err);
   }
 }
