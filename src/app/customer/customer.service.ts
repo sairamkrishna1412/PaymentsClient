@@ -18,6 +18,12 @@ export class CustomerService {
   
   constructor(private http: HttpClient) {}
 
+  getMe(): Observable<any> {
+    return this.http
+      .get<any>(`${this.rootUrl}/cust/getMe`, {withCredentials : true})
+      .pipe(catchError(this.handleError));
+  }
+
   getIsLive(): Observable<any> {
     return this.http
       .get<any>(`${this.rootUrl}/status`)

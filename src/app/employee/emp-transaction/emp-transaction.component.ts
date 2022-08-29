@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { EmployeeService } from '../employee.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'pp-emp-transaction',
@@ -10,11 +12,11 @@ import Swal from 'sweetalert2';
 export class EmpTransactionComponent implements OnInit {
 
   empTransactionForm = this.formBuilder.group({
-    customerId: ['', Validators.required],
-    receiverAccountHolderNumber: ['', Validators.required],
-    senderBic: ['', Validators.required],
-    receiverBic: ['', Validators.required],
-    currencyAmount: ['', Validators.required],
+    customerId: ['83020817828620', Validators.required],
+    receiverAccountHolderNumber: ['71319440983198', Validators.required],
+    senderBic: ['ABBLINBBXXX', Validators.required],
+    receiverBic: ['ACBLINBBXXX', Validators.required],
+    currencyAmount: ['123', Validators.required],
 
   
   });
@@ -23,6 +25,8 @@ export class EmpTransactionComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private empService: EmployeeService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,51 +34,19 @@ export class EmpTransactionComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn('Your order has been submitted', this.empTransactionForm.value);
-    // if (this.empTransactionForm.value){
-      this.sweetAlert()
-    // }
-    this.empTransactionForm.reset();
+    // console.warn('Your order has been submitted', this.empTransactionForm.value);
+    this.empService.transferCtc(this.empTransactionForm.value).subscribe({
+      next : (data) => {
+        if(data.status == 200){
+          data = data.data;
+          console.log("successful", data);
+          this.router.navigate(["/emp/dashboard"]);
+          this.empTransactionForm.reset();
+        }
+      },
+      error : (err) => {
+        console.log("error", err);
+      }
+    });
   }
-
-  sweetAlert() {
-    const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: true
-  })
-
-  swalWithBootstrapButtons.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, proceed!',
-    cancelButtonText: 'No, cancel!',
-    reverseButtons: true
-  }).then((result) => {
-    if (result.isConfirmed) {
-      swalWithBootstrapButtons.fire(
-        'Transaction Successful!',
-        'Your transaction has been recorded.',
-        'success'
-      )
-    } else if (
-      /* Read more about handling dismissals below */
-      result.dismiss === Swal.DismissReason.cancel
-    ) {
-      swalWithBootstrapButtons.fire(
-        'Cancelled',
-        'Your transaction has been cancelled :)',
-        'error'
-      )
-    }
-  })
-  }
-
-
-
-
 }
