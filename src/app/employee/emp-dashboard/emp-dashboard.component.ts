@@ -8,10 +8,8 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./emp-dashboard.component.css'],
 })
 export class EmpDashboardComponent implements OnInit {
-<<<<<<< HEAD
-  // empName: string = 'Vikram';
-=======
->>>>>>> 2a9b633e36750069fd7a7f02476412c98fe4e8c2
+
+  empName: string = 'Vikram';
   empData : any;
   user : any;
   pendingTransactions : any = [];
