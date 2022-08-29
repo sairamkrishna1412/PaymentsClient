@@ -4,6 +4,7 @@ import { CustomerService } from 'src/app/customer/customer.service';
 import { EmployeeService } from 'src/app/employee/employee.service';
 import { GeneralService } from '../general.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'pp-login',
@@ -48,7 +49,12 @@ export class LoginComponent implements OnInit {
         console.log("User log in response: ", data);
       },
       error : (err) => {
-        console.log("err : ", err);
+        // console.log("err : ", err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid Credentials!',
+          })
       }
     });
   }

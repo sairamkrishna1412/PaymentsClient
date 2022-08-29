@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { EmployeeService } from '../employee.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./emp-dashboard.component.css'],
 })
 export class EmpDashboardComponent implements OnInit {
-  empName: string = 'Vikram';
+  // empName: string = 'Vikram';
   empData : any;
   user : any;
   pendingTransactions : any;
@@ -50,7 +51,13 @@ export class EmpDashboardComponent implements OnInit {
             }
           }
         },
-        error : (err) => {console.log(err)}
+        error: (err) => {
+          Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          })
+        }
       })
     }
     console.log(this.empData);

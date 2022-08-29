@@ -5,14 +5,13 @@
       <div class="top-container pt-5 flex justify-between">
         <h1 class="text-4xl font-semibold italic">Welcome {{ user?.employeeName }}.</h1>
         <div class="new-transaction flex items-center gap-1 cursor-pointer">
-          <a routerLink="/emp/transaction">
-            <img src="assets/svg/add.svg" alt="Add" />
-            <span class="text-xl">New Transaction</span>
+          <a routerLink="/emp/transaction" id="transaction">
+            <span class="text-xl"><i class="fa-solid fa-plus" styl></i> New Transaction</span>
           </a>
         </div>
       </div>
       <div class="mt-20">
-        <h2 class="text-xl">Pending Transactions :</h2>
+        <h2 class="text-xl"><b>Pending Transactions :</b></h2>
         <table
           class="mt-4 table-auto bg-tertiary rounded-2xl w-full text-tblack border-separate border-spacing-x-4 border-spacing-y-8">
           <thead>
@@ -34,7 +33,24 @@
               <td>{{transaction.receiverAccountHolderNumber}} ({{transaction.receiverAccountHolderName}})</td>
               <td>{{transaction.currencyAmount | currency: 'INR'}}</td>
               <td>{{0.0025*transaction.currencyAmount | currency: 'INR'}}</td>
-              <td>Accept, Reject</td>
+              <td>
+                <div class="buttons">
+
+                  <div class="action_btn">
+
+                    <button name="submit"
+                      class="hover:shadow-lg action_btn submit bg-emerald-200 hover:bg-emerald-400 hover:text-white transition-all"
+                      type="submit" value="Save" onclick="">Accept</button>
+                    <button name="submit"
+                      class="action_btn cancel hover:shadow-lg bg-red-200 hover:bg-red-400 hover:text-white transition-all"
+                      type="submit" value="Cancel" onclick="">Reject</button>
+
+                    <p id="saved"></p>
+
+                  </div>
+
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -45,7 +61,7 @@
   <div class="bg-secondary py-4">
     <div class="container">
       <div class="mt-10">
-        <h2 class="text-xl">Completed Transactions :</h2>
+        <h2 class="text-xl"><b>Completed Transactions :</b></h2>
         <table
           class="mt-4 table-auto bg-tertiary rounded-2xl w-full text-tblack border-separate border-spacing-x-4 border-spacing-y-8">
           <thead>
@@ -67,7 +83,8 @@
               <td>{{transaction.receiverAccountHolderNumber}} ({{transaction.receiverAccountHolderName}})</td>
               <td>{{transaction.currencyAmount | currency: 'INR'}}</td>
               <td>{{0.0025*transaction.currencyAmount | currency: 'INR'}}</td>
-              <td>{{transaction.status}}</td>
+              <td><span class="{{transaction.status}}">{{transaction.status}}</span>
+              </td>
             </tr>
           </tbody>
         </table>

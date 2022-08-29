@@ -1,0 +1,37 @@
+.buttons {
+  width: 100px;
+  margin: 0 auto;
+  /* display: inline; */
+}
+
+.action_btn {
+  width: 100px;
+  /* margin: 0 auto; */
+  display: inline;
+}
+
+button {
+  margin: 5px;
+  border-radius: 30px;
+}
+
+.ACCEPTED {
+  background-color: #4ade80;
+  color: white;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+
+.REJECTED {
+  background-color: #f87171;
+  color: white;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+
+.PENDING {
+  background-color: #fdba74;
+  color: white;
+  border-radius: 4px;
+  padding: 0 5px;
+}
