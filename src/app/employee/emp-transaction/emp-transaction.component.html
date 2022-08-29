@@ -1,57 +1,36 @@
 <div class="min-h-screen text-white">
   <pp-header class="bg-white"></pp-header>
   <div class="bg-tertiary min-h-screen pt-10">
-    <div
-      class="newTrnsactionBox bg-primaryl px-20 py-10 max-w-3xl rounded-[30px] mx-auto"
-    >
-      <form>
+    <div class="newTrnsactionBox bg-primaryl px-20 py-10 max-w-3xl rounded-[30px] mx-auto">
+      <form [formGroup]="empTransactionForm" (ngSubmit)="onSubmit()">
         <h1 class="text-4xl font-semibold italic mb-16">New Transaction</h1>
         <div class="form-groups flex flex-col gap-10">
           <div class="form-group text-lg flex flex-col gap-2">
             <label for="sid">Sender Account Holder Number</label>
-            <input
-              id="sid"
-              class="px-3 py-2 rounded outline-none text-tblack"
-              type="number"
-              min="0"
-            />
+            <input id="sid" class="px-3 py-2 rounded outline-none text-tblack" type="number" min="0"
+              formControlName="customerId">
           </div>
           <div class="form-group text-lg flex flex-col gap-2">
             <label for="sbic">Sender Account Holder Bank BIC</label>
             <!-- Replace with dropdown -->
-            <input
-              id="sbic"
-              class="px-3 py-2 rounded outline-none text-tblack"
-              type="text"
-            />
+            <input id="sbic" class="px-3 py-2 rounded outline-none text-tblack" type="text" formControlName="senderBic">
           </div>
           <div class="form-group text-lg flex flex-col gap-2">
             <label for="rid">Receiver Account Holder Number</label>
-            <input
-              id="rid"
-              class="px-3 py-2 rounded outline-none text-tblack"
-              type="number"
-              min="0"
-            />
+            <input id="rid" class="px-3 py-2 rounded outline-none text-tblack" type="number" min="0"
+              formControlName="receiverAccountHolderNumber" />
           </div>
           <div class="form-group text-lg flex flex-col gap-2">
             <label for="rbic">Receiver Account Holder Bank BIC</label>
             <!-- Replace with dropdown -->
-            <input
-              id="rbic"
-              class="px-3 py-2 rounded outline-none text-tblack"
-              type="text"
-            />
+            <input id="rbic" class="px-3 py-2 rounded outline-none text-tblack" type="text"
+              formControlName="receiverBic">
           </div>
           <div class="form-group text-lg flex flex-col gap-2">
             <label for="amt">Amount</label>
             <!-- Replace with dropdown -->
-            <input
-              id="amt"
-              class="px-3 py-2 rounded outline-none text-tblack"
-              type="number"
-              min="1"
-            />
+            <input id="amt" class="px-3 py-2 rounded outline-none text-tblack" type="number" min="1"
+              formControlName="currencyAmount" />
           </div>
           <div class="self-center">
             <button class="bg-tertiary px-20 py-5 rounded-3xl text-primary">
@@ -63,3 +42,41 @@
     </div>
   </div>
 </div>
+
+
+<!-- <script>
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+
+  swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, proceed!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      swalWithBootstrapButtons.fire(
+        'Transaction Successful!',
+        'Your transaction has been recorded.',
+        'success'
+      )
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your transaction has been cancelled :)',
+        'error'
+      )
+    }
+  })
+</script> -->

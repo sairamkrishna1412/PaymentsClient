@@ -12,7 +12,7 @@ import { CustTransactionComponent } from './customer/cust-transaction/cust-trans
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './general/home/home.component';
-
+import { DashHeaderComponent } from './shared/dash-header/dash-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +23,7 @@ import { HomeComponent } from './general/home/home.component';
     CustDashboardComponent,
     CustTransactionComponent,
     HomeComponent,
+    DashHeaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
