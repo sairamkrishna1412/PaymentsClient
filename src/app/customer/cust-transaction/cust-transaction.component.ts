@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'pp-cust-transaction',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cust-transaction.component.css']
 })
 export class CustTransactionComponent implements OnInit {
+  custTransactionForm = this.formBuilder.group({
+    receiverAccountHolderNumber: "",
+    receiverBic: "",
+    currencyAmount: ""
+  });
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(): void {
+    // Process checkout data here
+    console.warn('Your transaction has been submitted', this.custTransactionForm.value);
+    this.custTransactionForm.reset();
+  }
 }

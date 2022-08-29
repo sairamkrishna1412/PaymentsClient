@@ -9,10 +9,10 @@ import { EmpDashboardComponent } from './employee/emp-dashboard/emp-dashboard.co
 import { EmpTransactionComponent } from './employee/emp-transaction/emp-transaction.component';
 import { CustDashboardComponent } from './customer/cust-dashboard/cust-dashboard.component';
 import { CustTransactionComponent } from './customer/cust-transaction/cust-transaction.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './general/home/home.component';
-
+import { DashHeaderComponent } from './shared/dash-header/dash-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,8 +23,9 @@ import { HomeComponent } from './general/home/home.component';
     CustDashboardComponent,
     CustTransactionComponent,
     HomeComponent,
+    DashHeaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
