@@ -76,8 +76,8 @@ export class EmpDashboardComponent implements OnInit {
     ) {
       firstLoad = false;
       this.user = this.empData.user;
-      this.pendingTransactions = this.empData.pendingTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
-      this.finalizedTransactions = this.empData.finalizedTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
+      this.pendingTransactions = this.empData.pendingTransactions.sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
+      this.finalizedTransactions = this.empData.finalizedTransactions.sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
       console.log(
         this.user,
         this.pendingTransactions,
@@ -95,8 +95,8 @@ export class EmpDashboardComponent implements OnInit {
               data.hasOwnProperty('finalizedTransactions')
             ) {
               this.user = data.user;
-              this.pendingTransactions = data.pendingTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
-              this.finalizedTransactions = data.finalizedTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
+              this.pendingTransactions = data.pendingTransactions.sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
+              this.finalizedTransactions = data.finalizedTransactions.sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
             }
           }
         },

@@ -28,10 +28,10 @@ export class CustDashboardComponent implements OnInit {
       this.user = this.userData.user;
       this.pendingTransactions = this.userData.transactions.filter(
         (t: any) => t.status == 'PENDING'
-      ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
+      ).sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
       this.completedTransactions = this.userData.transactions.filter(
         (t: any) => t.status == 'ACCEPTED' || t.status == 'REJECTED'
-      ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
+      ).sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
       console.log(
         this.user,
         this.pendingTransactions,
@@ -51,10 +51,10 @@ export class CustDashboardComponent implements OnInit {
               this.user = data.user;
               this.pendingTransactions = data.transactions.filter(
                 (t: any) => t.status == 'PENDING'
-              ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
+              ).sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
               this.completedTransactions = data.transactions.filter(
                 (t: any) => t.status == 'ACCEPTED' || t.status == 'REJECTED'
-              ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
+              ).sort((a:any,b:any)=> new Date(b.transferDate).getTime() - new Date(a.transferDate).getTime());
               console.log(
                 this.user,
                 this.pendingTransactions,
