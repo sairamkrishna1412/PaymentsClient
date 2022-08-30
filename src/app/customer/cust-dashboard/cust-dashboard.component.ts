@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../customer.service';
+import Swal from 'sweetalert2';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'pp-cust-dashboard',
@@ -9,39 +11,76 @@ import { CustomerService } from '../customer.service';
 export class CustDashboardComponent implements OnInit {
   custName: string = 'Rolex';
   custBalance: number = 2300.0;
-  userData : any;
-  user : any;
-  pendingTransactions : any;
-  completedTransactions : any;
+  userData: any;
+  user: any;
+  pendingTransactions: any;
+  completedTransactions: any;
 
-  constructor(private custService: CustomerService) {}
+  constructor(private custService: CustomerService, private router: Router) {}
 
   ngOnInit(): void {
     this.userData = this.custService.userData;
-    if(this.userData.hasOwnProperty('user') 
-    && this.userData.hasOwnProperty('transactions') ){
+    if (
+      this.userData.hasOwnProperty('user') &&
+      this.userData.hasOwnProperty('transactions')
+    ) {
       this.user = this.userData.user;
-      this.pendingTransactions = this.userData.transactions.filter((t : any) => t.status == "PENDING");
-      this.completedTransactions = this.userData.transactions.filter((t : any) => t.status == "ACCEPTED" || t.status == "REJECTED");
-      console.log(this.user, this.pendingTransactions, this.completedTransactions);
-    }else{
+      this.pendingTransactions = this.userData.transactions.filter(
+        (t: any) => t.status == 'PENDING'
+      );
+      this.completedTransactions = this.userData.transactions.filter(
+        (t: any) => t.status == 'ACCEPTED' || t.status == 'REJECTED'
+      );
+      console.log(
+        this.user,
+        this.pendingTransactions,
+        this.completedTransactions
+      );
+    } else {
       // make a request to get user details
       this.custService.getMe().subscribe({
-        next : (data) => {
-          if(data.status == 200){
+        next: (data) => {
+          if (data.status == 200) {
             console.log(data);
             data = data.data;
-            if(data.hasOwnProperty('user') 
-              && data.hasOwnProperty('transactions') ){
+            if (
+              data.hasOwnProperty('user') &&
+              data.hasOwnProperty('transactions')
+            ) {
               this.user = data.user;
-              this.pendingTransactions = data.transactions.filter((t : any) => t.status == "PENDING");
-              this.completedTransactions = data.transactions.filter((t : any) => t.status == "ACCEPTED" || t.status == "REJECTED");
-              console.log(this.user, this.pendingTransactions, this.completedTransactions);
+              this.pendingTransactions = data.transactions.filter(
+                (t: any) => t.status == 'PENDING'
+              );
+              this.completedTransactions = data.transactions.filter(
+                (t: any) => t.status == 'ACCEPTED' || t.status == 'REJECTED'
+              );
+              console.log(
+                this.user,
+                this.pendingTransactions,
+                this.completedTransactions
+              );
             }
           }
         },
-        error : (err) => {console.log(err)}
-      })
+        error: (err) => {
+          console.log('error', err);
+          let text = 'Something went wrong!';
+          if (err.error.status == 403) {
+            text = 'You are not allowed to this page!';
+          } else {
+            text = err.error.message;
+          }
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text,
+          }).then((result) => {
+            if (result.isConfirmed && err.error.status == 403) {
+              this.router.navigate(['/emp/dashboard']);
+            }
+          });
+        },
+      });
     }
-}
+  }
 }

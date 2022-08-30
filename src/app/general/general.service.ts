@@ -19,9 +19,18 @@ export class GeneralService {
   loginUser(form: any): Observable<any> {
     console.log(form, typeof form);
     return this.http
-          .post<any>(`${this.rootUrl}/login`
-          , {username : form.username, password : form.password}, {withCredentials: true})
-          .pipe(catchError(this.handleError));
+      .post<any>(
+        `${this.rootUrl}/login`,
+        { username: form.username, password: form.password },
+        { withCredentials: true }
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  logoutUser(): Observable<any> {
+    return this.http
+      .post<any>(`${this.rootUrl}/signOut`, { withCredentials: true })
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {

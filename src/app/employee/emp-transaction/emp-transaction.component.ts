@@ -7,38 +7,33 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'pp-emp-transaction',
   templateUrl: './emp-transaction.component.html',
-  styleUrls: ['./emp-transaction.component.css']
+  styleUrls: ['./emp-transaction.component.css'],
 })
 export class EmpTransactionComponent implements OnInit {
-
   empTransactionForm = this.formBuilder.group({
     customerId: ['39145971759304', Validators.required],
     receiverAccountHolderNumber: ['71319440983198', Validators.required],
     senderBic: ['AXISINBBXXX', Validators.required],
     receiverBic: ['ACBLINBBXXX', Validators.required],
-    currencyAmount: ['123', Validators.required]
+    currencyAmount: ['123', Validators.required],
   });
-
-  
 
   constructor(
     private formBuilder: FormBuilder,
     private empService: EmployeeService,
     private router: Router
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     // console.warn('Your order has been submitted', this.empTransactionForm.value);
     this.empService.transferCtc(this.empTransactionForm.value).subscribe({
-      next : (data) => {
-        if(data.status == 200){
+      next: (data) => {
+        if (data.status == 200) {
           data = data.data;
-          console.log("successful", data);
-          this.router.navigate(["/emp/dashboard"]);
+          console.log('successful', data);
+          this.router.navigate(['/emp/dashboard']);
           this.empTransactionForm.reset();
         }
       },
@@ -47,9 +42,9 @@ export class EmpTransactionComponent implements OnInit {
           icon: 'error',
           title: 'Oops...',
           text: err.error.message,
-          })
-        console.log("error", err);
-      }
+        });
+        console.log('error', err);
+      },
     });
   }
 }
