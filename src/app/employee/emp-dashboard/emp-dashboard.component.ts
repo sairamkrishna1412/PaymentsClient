@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { EmployeeService } from '../employee.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+let firstLoad = true;
 @Component({
   selector: 'pp-emp-dashboard',
   templateUrl: './emp-dashboard.component.html',
@@ -22,7 +23,7 @@ export class EmpDashboardComponent implements OnInit {
 
   onFinalize(transactionId: string, isAccepted: boolean) {
     console.log('heread');
-    let data;
+    let data: any;
     if (isAccepted) {
       data = {
         transactionId,
@@ -38,10 +39,18 @@ export class EmpDashboardComponent implements OnInit {
     }
     console.log(data);
     this.empService.finalizeTransaction(data).subscribe({
-      next: (data) => {
-        if (data.status == 200) {
-          console.log(data);
-          data = data.data;
+      next: (resData) => {
+        if (resData.status == 200) {
+          console.log(resData);
+          resData = resData.data;
+          Swal.fire({
+          icon: 'success',
+          title:'Done',
+          text: `Transaction ${data.status.toLowerCase()}`,
+          }).then((result) => {
+            window.location.reload();
+            // this.router.navigate(['/emp/dashboard']);
+          });
         }
       },
       error: (err) => {
@@ -49,7 +58,10 @@ export class EmpDashboardComponent implements OnInit {
           icon: 'error',
           title: 'Oops...',
           text: err.error.message,
-        });
+        }).then((result) => {
+            window.location.reload();
+            // this.router.navigate(['/emp/dashboard']);
+          });;
       },
     });
   }
@@ -59,11 +71,13 @@ export class EmpDashboardComponent implements OnInit {
     if (
       this.empData.hasOwnProperty('user') &&
       this.empData.hasOwnProperty('pendingTransactions') &&
-      this.empData.hasOwnProperty('finalizedTransactions')
+      this.empData.hasOwnProperty('finalizedTransactions') && 
+      firstLoad
     ) {
+      firstLoad = false;
       this.user = this.empData.user;
-      this.pendingTransactions = this.empData.pendingTransactions;
-      this.finalizedTransactions = this.empData.finalizedTransactions;
+      this.pendingTransactions = this.empData.pendingTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
+      this.finalizedTransactions = this.empData.finalizedTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
       console.log(
         this.user,
         this.pendingTransactions,
@@ -81,8 +95,8 @@ export class EmpDashboardComponent implements OnInit {
               data.hasOwnProperty('finalizedTransactions')
             ) {
               this.user = data.user;
-              this.pendingTransactions = data.pendingTransactions;
-              this.finalizedTransactions = data.finalizedTransactions;
+              this.pendingTransactions = data.pendingTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
+              this.finalizedTransactions = data.finalizedTransactions.sort((a:any,b:any)=> b.transferDate - a.transferDate);
             }
           }
         },

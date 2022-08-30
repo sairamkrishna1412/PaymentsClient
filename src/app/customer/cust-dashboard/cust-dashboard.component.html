@@ -34,9 +34,11 @@
               <td>{{transaction.transferDate | date}}</td>
               <td *ngIf='transaction.customer.customerId == user?.customerId'>Debit</td>
               <td *ngIf='transaction.receiverAccountHolderNumber == user?.customerId'>Credit</td>
-              <td *ngIf='transaction.customer.customerId == user?.customerId; else credit'>{{transaction.receiverAccountHolderName}} ({{transaction.receiverAccountHolderNumber}})</td>
+              <td *ngIf='transaction.customer.customerId == user?.customerId; else credit'>
+                {{transaction.receiverAccountHolderName}} ({{transaction.receiverAccountHolderNumber}})</td>
               <ng-template #credit>{{transaction.customer.accountHolderName}}</ng-template>
-              <td *ngIf='transaction.customer.customerId == user?.customerId; else bank'>{{transaction.receiverBank.bankName}}</td>
+              <td *ngIf='transaction.customer.customerId == user?.customerId; else bank'>
+                {{transaction.receiverBank.bankName}}</td>
               <ng-template #bank>{{transaction.senderBank.bankName}}</ng-template>
               <td>CTC</td>
               <td>{{transaction.currencyAmount}}</td>
@@ -69,11 +71,12 @@
               <td>{{transaction.transferDate | date}}</td>
               <td *ngIf='transaction.customer.customerId == user?.customerId'>Debit</td>
               <td *ngIf='transaction.receiverAccountHolderNumber == user?.customerId'>Credit</td>
-              <td *ngIf='transaction.customer.customerId == user?.customerId; else credit'>{{transaction.receiverAccountHolderName}} ({{transaction.receiverAccountHolderNumber}})</td>
+              <td *ngIf='transaction.customer.customerId == user?.customerId; else credit'>
+                {{transaction.receiverAccountHolderName}} ({{transaction.receiverAccountHolderNumber}})</td>
               <ng-template #credit>{{transaction.customer.accountHolderName}}</ng-template>
               <td>CTC</td>
               <td>{{transaction.currencyAmount}}</td>
-              <td>{{transaction.status}}</td>
+              <td><span class="{{transaction.status}}">{{transaction.status}}</span></td>
               <td>{{transaction.employeeRemarks}}</td>
             </tr>
           </tbody>

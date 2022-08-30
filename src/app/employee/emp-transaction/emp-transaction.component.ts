@@ -33,7 +33,13 @@ export class EmpTransactionComponent implements OnInit {
         if (data.status == 200) {
           data = data.data;
           console.log('successful', data);
-          this.router.navigate(['/emp/dashboard']);
+          Swal.fire({
+          icon: 'success',
+          title:'Done',
+          text: `Transaction Succesful`,
+          }).then(() => {
+            this.router.navigate(['/emp/dashboard']);
+          })
           this.empTransactionForm.reset();
         }
       },

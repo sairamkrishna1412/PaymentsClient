@@ -3,14 +3,13 @@ import { CustomerService } from '../customer.service';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+let firstLoad = true;
 @Component({
   selector: 'pp-cust-dashboard',
   templateUrl: './cust-dashboard.component.html',
   styleUrls: ['./cust-dashboard.component.css'],
 })
 export class CustDashboardComponent implements OnInit {
-  custName: string = 'Rolex';
-  custBalance: number = 2300.0;
   userData: any;
   user: any;
   pendingTransactions: any;
@@ -23,14 +22,16 @@ export class CustDashboardComponent implements OnInit {
     if (
       this.userData.hasOwnProperty('user') &&
       this.userData.hasOwnProperty('transactions')
+      && firstLoad
     ) {
+      firstLoad = false;
       this.user = this.userData.user;
       this.pendingTransactions = this.userData.transactions.filter(
         (t: any) => t.status == 'PENDING'
-      );
+      ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
       this.completedTransactions = this.userData.transactions.filter(
         (t: any) => t.status == 'ACCEPTED' || t.status == 'REJECTED'
-      );
+      ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
       console.log(
         this.user,
         this.pendingTransactions,
@@ -50,10 +51,10 @@ export class CustDashboardComponent implements OnInit {
               this.user = data.user;
               this.pendingTransactions = data.transactions.filter(
                 (t: any) => t.status == 'PENDING'
-              );
+              ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
               this.completedTransactions = data.transactions.filter(
                 (t: any) => t.status == 'ACCEPTED' || t.status == 'REJECTED'
-              );
+              ).sort((a:any,b:any)=> a.transferDate - b.transferDate);
               console.log(
                 this.user,
                 this.pendingTransactions,

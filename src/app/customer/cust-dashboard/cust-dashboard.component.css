@@ -1,0 +1,20 @@
+.ACCEPTED {
+  background-color: #4ade80;
+  color: white;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+
+.REJECTED {
+  background-color: #f87171;
+  color: white;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+
+.PENDING {
+  background-color: #fdba74;
+  color: white;
+  border-radius: 4px;
+  padding: 0 5px;
+}

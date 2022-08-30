@@ -29,7 +29,13 @@ export class CustTransactionComponent implements OnInit {
         if(data.status == 200){
           data = data.data;
           console.log("successful", data);
-          this.router.navigate(["/cust/dashboard"]);
+          Swal.fire({
+          icon: 'success',
+          title:'Done',
+          text: `Transaction ${data.status.toLowerCase()}`,
+          }).then(() => {
+            this.router.navigate(["/cust/dashboard"]);
+          })
           this.custTransactionForm.reset();
         }
       },
